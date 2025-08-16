@@ -1,0 +1,37 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "typecheck": {
+      "dependsOn": ["^typecheck"],
+      "outputs": []
+    },
+    "lint": {
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "outputs": ["test-results/**"]
+    },
+    "clean": {
+      "cache": false
+    },
+    "postinstall": {
+      "cache": false
+    }
+  },
+  "globalEnv": [
+    "NODE_ENV",
+    "AM_USER",
+    "AM_PASS",
+    "PLAYWRIGHT_BROWSERS_PATH",
+    "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD"
+  ]
+}

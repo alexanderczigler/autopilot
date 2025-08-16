@@ -1,0 +1,7 @@
+node_modules
+dist
+.turbo
+.playwright
+test-results
+.env
+.envrc
