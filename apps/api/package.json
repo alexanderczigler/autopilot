@@ -1,0 +1,21 @@
+{
+  "name": "@autopilot/api",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "dev": "tsc -w -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "biome check .",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "typescript": "5.5.4"
+  },
+  "dependencies": {
+    "@ghostery/adblocker-playwright": "2.11.3",
+    "playwright": "1.54.2"
+  }
+}
