@@ -27,5 +27,6 @@
       "@autopilot/shared": ["packages/shared/src"],
       "@autopilot/airline": ["apps/airline/src"]
     }
-  }
+  },
+  "types": ["node"]
 }

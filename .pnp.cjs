@@ -19,6 +19,10 @@ const RAW_RUNTIME_STATE =
       "reference": "workspace:apps/airline"\
     },\
     {\
+      "name": "@autopilot/am2-api",\
+      "reference": "workspace:apps/am2-api"\
+    },\
+    {\
       "name": "@autopilot/shared",\
       "reference": "workspace:packages/shared"\
     }\
@@ -28,6 +32,7 @@ const RAW_RUNTIME_STATE =
   "pnpZipBackend": "libzip",\
   "fallbackExclusionList": [\
     ["@autopilot/airline", ["workspace:apps/airline"]],\
+    ["@autopilot/am2-api", ["workspace:apps/am2-api"]],\
     ["@autopilot/shared", ["workspace:packages/shared"]],\
     ["autopilot", ["workspace:."]]\
   ],\
@@ -39,6 +44,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@biomejs/biome", "npm:1.8.3"],\
+          ["@types/node", "npm:24.3.0"],\
           ["autopilot", "workspace:."],\
           ["rimraf", "npm:6.0.1"],\
           ["turbo", "npm:2.1.3"],\
@@ -57,11 +63,22 @@ const RAW_RUNTIME_STATE =
         "linkType": "SOFT"\
       }]\
     ]],\
+    ["@autopilot/am2-api", [\
+      ["workspace:apps/am2-api", {\
+        "packageLocation": "./apps/am2-api/",\
+        "packageDependencies": [\
+          ["@autopilot/am2-api", "workspace:apps/am2-api"],\
+          ["typescript", "patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
     ["@autopilot/shared", [\
       ["workspace:packages/shared", {\
         "packageLocation": "./packages/shared/",\
         "packageDependencies": [\
           ["@autopilot/shared", "workspace:packages/shared"],\
+          ["@types/node", "npm:24.3.0"],\
           ["typescript", "patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"]\
         ],\
         "linkType": "SOFT"\
@@ -199,6 +216,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/node", [\
+      ["npm:24.3.0", {\
+        "packageLocation": "../../.yarn/berry/cache/@types-node-npm-24.3.0-ebc21e5665-10c0.zip/node_modules/@types/node/",\
+        "packageDependencies": [\
+          ["@types/node", "npm:24.3.0"],\
+          ["undici-types", "npm:7.10.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["ansi-regex", [\
       ["npm:5.0.1", {\
         "packageLocation": "../../.yarn/berry/cache/ansi-regex-npm-5.0.1-c963a48615-10c0.zip/node_modules/ansi-regex/",\
@@ -237,6 +264,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@biomejs/biome", "npm:1.8.3"],\
+          ["@types/node", "npm:24.3.0"],\
           ["autopilot", "workspace:."],\
           ["rimraf", "npm:6.0.1"],\
           ["turbo", "npm:2.1.3"],\
@@ -565,6 +593,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.yarn/berry/cache/typescript-patch-fe43cd9db9-10c0.zip/node_modules/typescript/",\
         "packageDependencies": [\
           ["typescript", "patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["undici-types", [\
+      ["npm:7.10.0", {\
+        "packageLocation": "../../.yarn/berry/cache/undici-types-npm-7.10.0-cd8324b9eb-10c0.zip/node_modules/undici-types/",\
+        "packageDependencies": [\
+          ["undici-types", "npm:7.10.0"]\
         ],\
         "linkType": "HARD"\
       }]\
