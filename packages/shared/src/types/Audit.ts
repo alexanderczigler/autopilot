@@ -1,4 +1,4 @@
-import type { ClassValues } from './ClassValues'
+import type { ClassValues } from './ClassValues.js'
 
 export type Audit = {
   demand: ClassValues

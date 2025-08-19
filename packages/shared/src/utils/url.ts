@@ -5,7 +5,7 @@ export const getURL = (p: string): string => {
     path = path.slice(1)
   }
 
-  const baseUrl = process.env.BASE_URL || 'https://example.com'
+  const baseUrl = process.env.GAME_URL || 'https://example.com'
 
   return `https://${baseUrl}/${path}`
 }

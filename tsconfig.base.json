@@ -8,8 +8,8 @@
   "compilerOptions": {
     "target": "ES2022",
     "lib": ["ES2022", "DOM"],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "moduleDetection": "force",
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
@@ -28,7 +28,7 @@
       "@autopilot/shared": ["packages/shared/src"],
       "@autopilot/airline": ["apps/airline/src"],
       "@autopilot/api": ["apps/api/src"]
-    }
-  },
-  "types": ["node"]
+    },
+    "types": ["node"]
+  }
 }
