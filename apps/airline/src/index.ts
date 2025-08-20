@@ -1,4 +1,13 @@
-import { getHubs, login, setSessionCookie } from '@autopilot/api'
+import {
+  getHubs,
+  getRouteAudit,
+  getRoutes,
+  getSuperSimulatorPrice,
+  login,
+  saveRoutePrice,
+  setSessionCookie,
+} from '@autopilot/api'
+import { getCapacity } from './services/network.js'
 ;(async () => {
   const cookie = process.env.GAME_COOKIE
   const username = process.env.GAME_USER
@@ -24,7 +33,39 @@ import { getHubs, login, setSessionCookie } from '@autopilot/api'
 
   const hubs = await getHubs()
 
-  console.log('Hubs:', hubs)
+  for (const hub of hubs) {
+    const routes = await getRoutes(hub)
+    console.log(`${hub.id} has ${routes.length} routes`)
+
+    for (const route of routes) {
+      console.log(
+        ` > ${route.departure.id}/${route.destination.id} (${route.id})`
+      )
+
+      const audit = await getRouteAudit(route)
+
+      if (audit.unlocks) {
+        console.log(` > Prices are locked until ${audit.unlocks}`)
+        continue
+      }
+
+      const capacity = getCapacity(route)
+
+      if (!capacity) {
+        console.warn(` > No capacity data for route: ${route.id}`)
+        continue
+      }
+
+      const prices = await getSuperSimulatorPrice({
+        auditPrice: audit.price,
+        capacity,
+        demand: audit.demand,
+      })
+
+      await saveRoutePrice(prices)
+    }
+  }
+
   process.exit(0)
 })().catch((error) => {
   console.error('An error occurred:', error)
