@@ -29,7 +29,10 @@ export const getHubs = async (): Promise<Hub[]> => {
     }
   }
 
-  const filteredHubs = hubs.filter((hub) => hub.name !== 'All...')
+  // TODO: Move to a util function.
+  const filteredHubs = hubs
+    .filter((hub) => hub.name !== 'All...')
+    .filter((hub) => hub.id !== 'Tou')
   return filteredHubs
 }
 
