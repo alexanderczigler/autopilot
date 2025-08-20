@@ -1,24 +1,29 @@
-import type { Audit } from '@autopilot/shared'
+import {
+  type Audit,
+  type ClassValues,
+  type Route,
+  getURL,
+  wait,
+} from '@autopilot/shared'
 import { page } from '../adapters/browser.js'
 
-export const doRouteAudit = async () => {
-  const url = page.url()
+export const getRouteAudit = async (route: Route): Promise<Audit> => {
+  await goToRoutePricingPage(route.id)
 
-  await page
-    .locator(
-      'div.box0 a.gradientButton.gradientButtonPurple.marketing_PriceLink'
-    )
-    .click()
-
-  await page.waitForSelector('#popupContainer[style*="display: block"]')
-  await page.locator('#popupContainer a.internalAuditLink.submitButton').click()
-
-  await page.waitForURL(url)
-}
-
-export const parseAudit = async (): Promise<Audit> => {
   const reliability = await page.$('p.reliability a.tooltipLink')
   await reliability?.scrollIntoViewIfNeeded()
+  const reliabilityHtml = await reliability?.innerHTML()
+
+  if (
+    !reliabilityHtml ||
+    !reliabilityHtml?.toLowerCase().startsWith('reliable')
+  ) {
+    console.log('Audit data is unreliable, auditing route...')
+    await auditRoute()
+    await goToRoutePricingPage(route.id)
+  } else {
+    console.log('Audit data is reliable.')
+  }
 
   const box1 = await page.$('div.box1')
   await box1?.scrollIntoViewIfNeeded()
@@ -64,15 +69,71 @@ export const parseAudit = async (): Promise<Audit> => {
     ),
   }
 
+  const unlocks = await parsePricingUnlocks()
+
   const audit: Audit = {
     demand,
     price,
+    unlocks,
   }
 
   return audit
 }
 
-export const parsePricingUnlocks = async () => {
+/**
+ * Saves the route prices for all classes. This will lock changes for 24 h on the specific route.
+ * @param price The price information to save.
+ */
+export const saveRoutePrice = async (price: ClassValues) => {
+  const priceBus = await page.$('input#line_priceBus')
+  await priceBus?.scrollIntoViewIfNeeded()
+  await priceBus?.fill(price.business.toString())
+
+  const priceCargo = await page.$('input#line_priceCargo')
+  await priceCargo?.scrollIntoViewIfNeeded()
+  await priceCargo?.fill(price.cargo.toString())
+
+  const priceEco = await page.$('input#line_priceEco')
+  await priceEco?.scrollIntoViewIfNeeded()
+  await priceEco?.fill(price.economy.toString())
+
+  const priceFirst = await page.$('input#line_priceFirst')
+  await priceFirst?.scrollIntoViewIfNeeded()
+  await priceFirst?.fill(price.first.toString())
+
+  const submitButton = await page.$(
+    'input[type="submit"].validBtn.validBtnBlue'
+  )
+
+  await submitButton?.scrollIntoViewIfNeeded()
+
+  await wait(2000)
+  await submitButton?.click()
+}
+
+/**
+ * Audits the current route.
+ */
+const auditRoute = async () => {
+  const url = page.url()
+
+  await page
+    .locator(
+      'div.box0 a.gradientButton.gradientButtonPurple.marketing_PriceLink'
+    )
+    .click()
+
+  await page.waitForSelector('#popupContainer[style*="display: block"]')
+  await page.locator('#popupContainer a.internalAuditLink.submitButton').click()
+
+  await page.waitForURL(url)
+}
+
+/**
+ * Parses the pricing unlocks from the page.
+ * @returns A string representing the unlock time or undefined.
+ */
+const parsePricingUnlocks = async () => {
   const countdownElement = await page.$(
     'div#marketing_linePricing span.amcountdown'
   )
@@ -89,4 +150,13 @@ export const parsePricingUnlocks = async () => {
   }
 
   return unlocks
+}
+
+/**
+ * Navigates to the pricing page for a specific route.
+ * @param routeId The ID of the route to navigate to.
+ */
+const goToRoutePricingPage = async (routeId: string) => {
+  await wait(5000)
+  await page.goto(getURL(`/marketing/pricing/${routeId}`))
 }
