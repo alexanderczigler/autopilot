@@ -18,11 +18,8 @@ export const getRouteAudit = async (route: Route): Promise<Audit> => {
     !reliabilityHtml ||
     !reliabilityHtml?.toLowerCase().startsWith('reliable')
   ) {
-    console.log('Audit data is unreliable, auditing route...')
     await auditRoute()
     await goToRoutePricingPage(route.id)
-  } else {
-    console.log('Audit data is reliable.')
   }
 
   const box1 = await page.$('div.box1')
