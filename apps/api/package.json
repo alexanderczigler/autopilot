@@ -15,11 +15,13 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "biome check .",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "test": "vitest"
   },
   "devDependencies": {
     "@types/node": "24.3.0",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "vitest": "3.2.4"
   },
   "dependencies": {
     "@autopilot/shared": "workspace:*",

@@ -11,7 +11,8 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "biome check .",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "test": "vitest"
   },
   "dependencies": {
     "@autopilot/api": "workspace:*",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@types/node": "24.3.0",
     "npm-run-all": "4.1.5",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "vitest": "3.2.4"
   }
 }
