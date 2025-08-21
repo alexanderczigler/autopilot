@@ -22,13 +22,13 @@ export const ARN: Circuits = {
   '04': {
     destinations: 'BKK BOG CAN HKG HND IAH JNB LAS',
     waves: {
-      'A350-1000': 3,
+      'A350-1000': 4,
     },
   },
   '05': {
     destinations: 'CPT DFW DMK DRW LIM NRT YIA',
     waves: {
-      'A350-1000': 3,
+      'A350-1000': 4,
     },
   },
   '06': {
