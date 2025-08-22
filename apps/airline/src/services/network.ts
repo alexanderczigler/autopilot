@@ -1,12 +1,14 @@
 import type { ClassValues, Route } from '@autopilot/shared'
 import { ARN } from '../hubs/ARN.js'
 import { BMA } from '../hubs/BMA.js'
+import { VST } from '../hubs/VST.js'
 import { AircraftConfiguration } from '../types/Aircraft.js'
 import type { Network } from '../types/Network.js'
 
 export const network: Network = {
   ARN,
   BMA,
+  VST,
 }
 
 export const getCapacity = (route: Route): ClassValues | undefined => {
