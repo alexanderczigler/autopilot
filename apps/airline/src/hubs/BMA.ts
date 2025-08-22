@@ -2,9 +2,9 @@ import type { Circuits } from '../types/Circuits.js'
 
 export const BMA: Circuits = {
   '01': {
-    destinations: 'AJR KRN LLA LYC OER SFT UME VBY',
+    destinations: 'AJR GOT KRN LLA LYC MMX OER UME',
     waves: {
-      'A220-100': 3,
+      'A220-100': 5,
     },
   },
 }

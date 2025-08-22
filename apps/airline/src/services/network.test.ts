@@ -25,16 +25,16 @@ describe('Circuits Service', () => {
       const route: Route = {
         id: 'test-route',
         departure: { id: 'BMA', name: 'Bromma' },
-        destination: { id: 'VBY', name: 'Visby' },
+        destination: { id: 'UME', name: 'Visby' },
       }
 
       it('should return the capacity for a given cargo class', async () => {
         const capacity = getCapacity(route)
 
-        expect(capacity?.economy).toBe(450)
-        expect(capacity?.business).toBe(96)
-        expect(capacity?.first).toBe(24)
-        expect(capacity?.cargo).toBe(30)
+        expect(capacity?.economy).toBe(750)
+        expect(capacity?.business).toBe(160)
+        expect(capacity?.first).toBe(40)
+        expect(capacity?.cargo).toBe(50)
       })
     })
   })
