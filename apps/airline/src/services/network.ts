@@ -1,6 +1,7 @@
 import type { ClassValues, Route } from '@autopilot/shared'
 import { ARN } from '../hubs/ARN.js'
 import { BMA } from '../hubs/BMA.js'
+import { DEN } from '../hubs/DEN.js'
 import { VST } from '../hubs/VST.js'
 import { AircraftConfiguration } from '../types/Aircraft.js'
 import type { Network } from '../types/Network.js'
@@ -8,6 +9,7 @@ import type { Network } from '../types/Network.js'
 export const network: Network = {
   ARN,
   BMA,
+  DEN,
   VST,
 }
 
