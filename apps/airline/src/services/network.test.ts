@@ -37,5 +37,22 @@ describe('Circuits Service', () => {
         expect(capacity?.cargo).toBe(50)
       })
     })
+
+    describe('DEN', () => {
+      const route: Route = {
+        id: 'test-route',
+        departure: { id: 'DEN', name: 'Denver' },
+        destination: { id: 'ANC', name: 'Anchorage' },
+      }
+
+      it('should return the capacity for a given cargo class', async () => {
+        const capacity = getCapacity(route)
+
+        expect(capacity?.economy).toBe(462)
+        expect(capacity?.business).toBe(88)
+        expect(capacity?.first).toBe(16)
+        expect(capacity?.cargo).toBe(134)
+      })
+    })
   })
 })
